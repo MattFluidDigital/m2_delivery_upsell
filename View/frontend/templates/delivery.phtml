@@ -1,0 +1,19 @@
+<?php
+$basketTotal         = $block->getCartTotal();
+$freeDeliveryCutOff  = $block->getFreeDeliveryCutOff();
+$freeDeliveryActive  = $block->getFreeDeliveryEnabled();
+$freeDeliveryAllowed = $block->getFreeDeliveryAllowed();
+
+if ($freeDeliveryAllowed === true && $freeDeliveryCutOff != '') { ?>
+    <div class="free-delivery">
+        <div class="box-wrapper">
+            <p>You qualify for FREE delivery</p>
+        </div>
+    </div>
+<?php } elseif(is_numeric($freeDeliveryAllowed)) { ?>
+    <div class="free-delivery">
+        <div class="box-wrapper">
+            <p>Add an extra <?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency(number_format($freeDeliveryAllowed,2),true,false);?> for free delivery.</p>
+        </div>
+    </div>
+<?php }
